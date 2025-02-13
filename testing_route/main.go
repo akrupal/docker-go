@@ -28,7 +28,7 @@ func main() {
 	//install rest client in extension to run the request in tests.http
 	// docker build . -t docker-containerised-api:latest
 	// docker run -p 9000:8080 docker-containerised-api:latest
-	//.  docker endpoint : which endpoint it needs to point to
+	//.  docker endpoint : which code endpoint it needs to point to
 	// the below command is not applicable here but there is an option in gin
 	// where you can skip giving the port and later on it can be set as an env var as below
 	// docker run -e PORT=9000 -p 9000:9000 docker-containerised-api:latest
