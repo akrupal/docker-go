@@ -33,7 +33,11 @@ func Start(config *configurator.SqlConfig) *Server {
 
 	router := mux.NewRouter()
 
-	router.HandleFunc("/add-product", newHandler.AddProduct)
+	router.HandleFunc("/add-product", newHandler.AddProduct).Methods(http.MethodPost)
+
+	router.HandleFunc("/get-product/{id}", newHandler.GetProduct).Methods(http.MethodGet)
+
+	router.HandleFunc("/get-all-products", newHandler.GetAllProducts).Methods(http.MethodGet)
 
 	Rhandler := handlers.RecoveryHandler()(router)
 	server := &Server{

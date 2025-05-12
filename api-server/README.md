@@ -10,6 +10,7 @@
 `SELECT * FROM product;`
 6) if you are on codespaces install `rest client` extension and you can use the tests.http file to send requests I found this to be very helpful as thunder client does not work here
 7) if you have the code on your machine no issue you can use anything to make requests
-8) do a cleanup of the code
-9) next work add middleware
-10) further work add unit tests
+8) Error propagation needs to be done when returning from db to client to handler layer
+9) do a cleanup of the code
+10) next work add middleware
+11) further work add unit tests

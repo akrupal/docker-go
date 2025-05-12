@@ -5,3 +5,11 @@ POST http://localhost:7777/add-product
     "price": 200,
     "available": true
 }
+
+###
+
+GET http://localhost:7777/get-product/1
+
+###
+
+GET http://localhost:7777/get-all-products

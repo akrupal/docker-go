@@ -16,6 +16,8 @@ type Database struct {
 
 type DatabaseInterface interface {
 	AddProduct(product Product) int
+	GetProduct(id int) Product
+	GetAllProducts() []Product
 }
 
 func CreateNewResourceRepository(ctx context.Context, config *configurator.SqlConfig) (DatabaseInterface, error) {
@@ -78,4 +80,39 @@ func (db *Database) AddProduct(product Product) int {
 		log.Fatal(err)
 	}
 	return pk
+}
+
+func (db *Database) GetProduct(id int) Product {
+	query := `SELECT name, price, available FROM product WHERE id=$1`
+	product := Product{}
+	err := db.Db.QueryRow(query, id).Scan(&product.Name, &product.Price, &product.Available)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			log.Fatalf("No rows found with id %d", id)
+		}
+		log.Fatal(err)
+	}
+	fmt.Println(product)
+	return product
+}
+
+func (db *Database) GetAllProducts() []Product {
+	query := `SELECT name, price, available FROM product`
+	product := Product{}
+	products := []Product{}
+	rows, err := db.Db.Query(query)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		err := rows.Scan(&product.Name, &product.Price, &product.Available)
+		if err != nil {
+			log.Fatal(err)
+		}
+		products = append(products, product)
+	}
+	fmt.Println(products)
+	return products
 }
