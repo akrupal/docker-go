@@ -1,0 +1,7 @@
+POST http://localhost:7777/add-product
+
+{
+    "name": "Webcam",
+    "price": 200,
+    "available": true
+}
